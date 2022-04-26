@@ -12,6 +12,8 @@
       <a href="#contact">Contact</a>
         {% if 'username' in session %}
             <a href="#contact">Logged as :{{ session['username'] }}</a>
+        {% else %}
+            <a href="#contact">Login</a>
         {% endif %}
     </div>
     <h1></h1>
