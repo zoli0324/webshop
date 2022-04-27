@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/js/script.js" defer></script>
     <meta charset="UTF-8">
     <title>Welcome</title>
 </head>
@@ -11,12 +12,51 @@
       <a class="left" href="#news">News</a>
       <a class="left" href="">Contact</a>
         {% if 'username' in session %}
-            <a class="right" href="">Logged as :{{ session['username'] }}</a>
+            <a class="right">Logged as :{{ session['username'] }}</a>
         {% else %}
-            <a class="right" href="">Login</a>
+            <a class="right" id="myBtn">Login</a>
         {% endif %}
     </div>
     <h1></h1>
         <p class="footer-text">Footer</p>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+        <div>
+            <div>
+                <table>
+                    <tr>
+                    <td class="reg">
+                        <h2>Login</h2>
+            <form action="/login" method="post">
+                  <label for="username">User name:</label><br>
+                  <input type="text" id="username" name="username" placeholder="John" required><br>
+                  <label for="password">Password:</label><br>
+                  <input type="password" id="password" name="password" required><br><br>
+                  <input type="submit" value="Submit">
+            </form>
+                    </td>
+                    <td class="reg">
+                        <h2>Registration</h2>
+            <form action="/registration" method="post">
+                  <label for="new-username">User name:</label><br>
+                  <input type="text" id="new-username" name="new-username" placeholder="John" required><br>
+                  <label for="new-password"> Password:</label><br>
+                  <input type="password" id="new-password" name="new-password" required><br><br>
+                <label for="repeat-password">Repeat Password:</label><br>
+                  <input type="password" id="repeat-password" name="repeat-password" required><br><br>
+                  <input type="submit" value="Submit">
+            </form>
+                    </td>
+                    </tr>
+                </table>
+        </div>
+  </div>
+
+</div>
 </body>
 </html>
