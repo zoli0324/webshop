@@ -11,11 +11,3 @@ def hash_password(plain_text_password):
 def verify_password(plain_text_password, hashed_password):
     hashed_bytes_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
-
-
-def generate_id():
-    storaged_ids = [i.get('user_id') for i in util.user_datas(value='user_id')]
-    user_id = uuid4().hex[:8]
-    while user_id in storaged_ids:
-        user_id = uuid4().hex[:8]
-    return user_id
