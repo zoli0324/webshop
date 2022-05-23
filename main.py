@@ -15,11 +15,8 @@ def main_page():
 @app.route("/login", methods=["POST"])
 def login():
     username = request.form["username"]
-    password = request.form["password"]
-    print(util.check_username(username))
     if(util.check_username(username) is False):
-        hashed_password = util.user_login(username)
-        if(password_handler.verify_password(password, hashed_password)):
+        if password_handler.verify_password(request.form["password"], util.user_login(username)):
             session.permanent = True
             session["username"] = request.form["username"]
     return redirect("/")
