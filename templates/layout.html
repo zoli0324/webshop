@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/css/style.css">
+    {% block script %}{% endblock %}
+    <meta charset="UTF-8">
+    {% block title %}{% endblock %}
+</head>
+<body class="body">
+<div class="header">
+  <h1>Header</h1>
+</div>
+    <div class="topnav">
+      <a class="left" href="/">Home</a>
+      <a class="left" href="#news">News</a>
+        {% if session['is_admin'] == True %}
+            <a class="left">Add Item</a>
+        {% endif %}
+        {% if 'username' in session %}
+        <a class="right" style="color:#bbc2f5;"><strong>{{ session['username'] }}   </strong></a>
+            <a class="right">Logged as : </a>
+            <a class="right" href="/logout">Logout</a>
+        {% else %}
+            <a class="right" id="myBtn">Login</a>
+        {% endif %}
+    </div>
+    {% block content %}{% endblock %}
+        <p class="footer-text">Footer</p>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+        <div>
+            <div>
+                <table>
+                    <tr>
+                    <td class="reg">
+                        <h2>Login</h2>
+            <form action="/login" method="post">
+                  <label for="username">User name:</label><br>
+                  <input type="text" id="username" name="username" placeholder="Username" required><br>
+                  <label for="password">Password:</label><br>
+                  <input type="password" id="password" name="password" required><br><br>
+                  <input type="submit" value="Submit">
+            </form>
+                    </td>
+                    <td class="reg">
+                        <h2>Registration</h2>
+            <form action="/registration" method="post">
+                  <label for="new-username">User name:</label><br>
+                  <input type="text" id="new-username" name="new-username" placeholder="John" required><br>
+                <label for="firstname">First Name:</label><br>
+                  <input type="text" id="firstname" name="firstname" placeholder="John" required><br>
+                <label for="lastname">Last name:</label><br>
+                  <input type="text" id="lastname" name="lastname" placeholder="Lastname" required><br>
+                  <label for="new-password"> Password:</label><br>
+                  <input type="password" id="new-password" name="new-password" required><br><br>
+                <label for="repeat-password">Repeat Password:</label><br>
+                  <input type="password" id="repeat-password" name="repeat-password" required><br><br>
+                  <input type="submit" value="Submit">
+            </form>
+                    </td>
+                    </tr>
+                </table>
+        </div>
+  </div>
+
+</div>
+</body>
+</html>
