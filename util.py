@@ -14,7 +14,7 @@ def check_username(cursor, username):
     WHERE username = %s
     '''
     cursor.execute(query, (username, ))
-    if(cursor.rowcount == 0):
+    if cursor.rowcount == 0:
         return True
     else:
         return False
@@ -37,7 +37,6 @@ def user_registration(cursor, username, fist_name, last_name, hashed_password):
     INSERT INTO users(username, is_admin, first_name, last_name, password)
     VALUES(%s , FALSE , %s, %s, %s)'''
     cursor.execute(query, (username, fist_name, last_name, hashed_password))
-    return cursor.fetchone()
 
 
 @connection.connection_handler
@@ -48,4 +47,14 @@ def user_login(cursor, username):
     WHERE username = %s'''
     cursor.execute(query, (username, ))
     return cursor.fetchall()[0]['password']
+
+
+@connection.connection_handler
+def change_password(cursor, username, new_password):
+    query = '''
+    UPDATE users
+    SET password = %s
+    WHERE username = %s
+    '''
+    cursor.execute(query, (new_password, username))
 

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %} <title>Profile</title>{% endblock %}
+{% block script%}<script type='text/javascript' src='../static/js/script.js' defer></script>{% endblock %}
+{% block content %}
+<h1 class="text-color">{{ session['username']}}</h1>
+           <h2 class="text-color">Change your password</h2>
+            <form action="/profile" method="post">
+                <label for="old-password" class="text-color">Old Password:</label><br>
+                        <input type="password" id="old-password" name="old-password" required><br><br>
+                  <label for="password" class="text-color">New Password:</label><br>
+                        <input type="password" id="password" name="password" required><br><br>
+                <label for="password" class="text-color">New Password Again:</label><br>
+                      <input type="password" id="password-repeat" name="password-repeat" required><br><br>
+                <input type="submit" value="Submit">
+            </form>
+{% endblock %}

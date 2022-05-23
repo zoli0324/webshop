@@ -12,6 +12,9 @@ def main_page():
     return render_template("index.html")
 
 
+# # # USER SETTING # # #
+
+
 @app.route("/login", methods=["POST"])
 def login():
     username = request.form["username"]
@@ -31,7 +34,8 @@ def registration():
     password = request.form["new-password"]
     repeat_pw = request.form["repeat-password"]
     check_username = util.check_username
-    if password == repeat_pw and check_username is True:
+    print(check_username)
+    if password == repeat_pw and check_username(username) is True:
         util.user_registration(username, fist_name, last_name, password_handler.hash_password(password))
         session.permanent = True
         session["username"] = username
@@ -42,6 +46,19 @@ def registration():
 def logout():
     session.pop('username', None)
     session.pop('is_admin', None)
+    return redirect("/")
+
+
+@app.route("/profile", methods=["GET", "POST"])
+def profile():
+    username = session["username"]
+    if request.method == "GET":
+        return render_template("profile.html")
+    else:
+        old_password = password_handler.hash_password(request.form["old-password"])
+        if password_handler.verify_password(request.form["old-password"], old_password):
+            if request.form["password"] == request.form["password-repeat"]:
+                util.change_password(username, password_handler.hash_password(request.form["password"]))
     return redirect("/")
 
 

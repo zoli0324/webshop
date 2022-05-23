@@ -17,7 +17,7 @@
             <a class="left">Add Item</a>
         {% endif %}
         {% if 'username' in session %}
-        <a class="right" style="color:#bbc2f5;"><strong>{{ session['username'] }}   </strong></a>
+        <a class="right" style="color:#bbc2f5;"href="/profile"><strong>{{ session['username'] }}   </strong></a>
             <a class="right">Logged as : </a>
             <a class="right" href="/logout">Logout</a>
         {% else %}
@@ -51,7 +51,7 @@
                         <h2>Registration</h2>
             <form action="/registration" method="post">
                   <label for="new-username">User name:</label><br>
-                  <input type="text" id="new-username" name="new-username" placeholder="John" required><br>
+                  <input type="text" id="new-username" name="new-username" placeholder="Killerkitty3000" required><br>
                 <label for="firstname">First Name:</label><br>
                   <input type="text" id="firstname" name="firstname" placeholder="John" required><br>
                 <label for="lastname">Last name:</label><br>
