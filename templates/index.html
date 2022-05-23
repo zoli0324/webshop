@@ -6,13 +6,18 @@
     <meta charset="UTF-8">
     <title>Welcome</title>
 </head>
-<body>
+<body class="body">
+<div class="header">
+  <h1>Header</h1>
+</div>
     <div class="topnav">
       <a class="left" href="/">Home</a>
       <a class="left" href="#news">News</a>
-      <a class="left" href="">Contact</a>
+        {% if session['is_admin'] == True %}
+            <a class="left">Add Item</a>
+        {% endif %}
         {% if 'username' in session %}
-        <a class="right" style="color:red;font-size:23px"><strong>{{ session['username'] }}   </strong></a>
+        <a class="right" style="color:#bbc2f5;"><strong>{{ session['username'] }}   </strong></a>
             <a class="right">Logged as : </a>
             <a class="right" href="/logout">Logout</a>
         {% else %}
