@@ -15,10 +15,11 @@ def main_page():
 @app.route("/login", methods=["POST"])
 def login():
     username = request.form["username"]
-    if(util.check_username(username) is False):
+    if util.check_username(username) is False:
         if password_handler.verify_password(request.form["password"], util.user_login(username)):
             session.permanent = True
             session["username"] = request.form["username"]
+            session["is_admin"] = util.is_admin(username)
     return redirect("/")
 
 
@@ -29,8 +30,8 @@ def registration():
     last_name = request.form["lastname"]
     password = request.form["new-password"]
     repeat_pw = request.form["repeat-password"]
-    check_username = util.check_username(username)
-    if(password == repeat_pw and check_username is True):
+    check_username = util.check_username
+    if password == repeat_pw and check_username is True:
         util.user_registration(username, fist_name, last_name, password_handler.hash_password(password))
         session.permanent = True
         session["username"] = username
@@ -40,6 +41,7 @@ def registration():
 @app.route("/logout", methods=["GET", "POST"])
 def logout():
     session.pop('username', None)
+    session.pop('is_admin', None)
     return redirect("/")
 
 
