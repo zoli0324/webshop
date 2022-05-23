@@ -6,3 +6,6 @@ CREATE TABLE users (
     LAST_NAME VARCHAR (10),
     PASSWORD VARCHAR(400)
                    );
+
+INSERT INTO users (USERNAME, IS_ADMIN, PASSWORD)
+VALUES ('admin', TRUE, '$2b$12$5fELMc9C42vz2l2IOLJ0ve1GJ02FVwg7ujapgKMZ/m/qBnrK14pOe')
