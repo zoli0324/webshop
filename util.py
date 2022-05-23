@@ -21,11 +21,23 @@ def check_username(cursor, username):
 
 
 @connection.connection_handler
+def is_admin(cursor, username):
+    query = '''
+    SELECT is_admin 
+    FROM users 
+    WHERE username = %s
+    '''
+    cursor.execute(query, (username,))
+    return cursor.fetchone()["is_admin"]
+
+
+@connection.connection_handler
 def user_registration(cursor, username, fist_name, last_name, hashed_password):
     query = '''
     INSERT INTO users(username, is_admin, first_name, last_name, password)
     VALUES(%s , FALSE , %s, %s, %s)'''
     cursor.execute(query, (username, fist_name, last_name, hashed_password))
+    return cursor.fetchone()
 
 
 @connection.connection_handler
