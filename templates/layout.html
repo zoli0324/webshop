@@ -14,7 +14,7 @@
       <a class="left" href="/">Home</a>
       <a class="left" href="#news">News</a>
         {% if session['is_admin'] == True %}
-            <a class="left">Add Item</a>
+            <a class="left" href="/add-product">Add Item</a>
         {% endif %}
         {% if 'username' in session %}
         <a class="right" style="color:#bbc2f5;"href="/profile"><strong>{{ session['username'] }}   </strong></a>

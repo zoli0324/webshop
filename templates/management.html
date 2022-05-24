@@ -5,10 +5,21 @@
 {% endblock %}
 {% block content %}
         <div>
-            <h2 class="text-color"></h2>
-            <form action="/add-item" method="post">
-                <label for="id" class="text-color">Old Password:</label><br>
-                <input type="text" id="id" name="old-password" required><br><br>
+            <h2 class="text-color">Add Product:</h2>
+            <form action="/add-product" method="post">
+                <label for="category" class="text-color">Category:</label><br>
+                    <input type="text" id="category" name="category" required><br><br>
+                <label for="product-name" class="text-color">Product Name:</label><br>
+                    <input type="text" id="product-name" name="product-name" required><br><br>
+                <label for="description" class="text-color">Description:</label><br>
+                <textarea type="text" rows="5" cols="25" id="description" maxlength="300" name="description"></textarea><br><br>
+                <label for="price" class="text-color">Price:</label><br>
+                    <input type="number" min="1" id="price" name="price" required><br><br>
+                <label for="in-stock" class="text-color">In Stock:</label><br>
+                    <input type="number" min="0" id="in-stock" name="in-stock" required><br><br>
+                <label for="img-path" class="text-color">In Stock:</label><br>
+                    <input type="file" id="img-path" name="img-path"><br><br>
+
 
                 <input type="submit" value="Submit">
             </form>
