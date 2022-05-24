@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %} <title>Database Management</title>{% endblock %}
+{% block script%}
+    <script type='text/javascript' src='../static/js/script.js' defer></script>
+{% endblock %}
+{% block content %}
+        <div>
+            <h2 class="text-color"></h2>
+            <form action="/add-item" method="post">
+                <label for="id" class="text-color">Old Password:</label><br>
+                <input type="text" id="id" name="old-password" required><br><br>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+{% endblock %}
