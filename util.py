@@ -60,9 +60,9 @@ def change_password(cursor, username, new_password):
 
 
 @connection.connection_handler
-def add_product(cursor, category, product_name, description, price, in_stock):
+def add_product(cursor, category, product_name, description, price, in_stock, img_path):
     query = '''
-    INSERT INTO products(CATEGORY, PRODUCT_NAME, DESCRIPTION, PRICE, IN_STOCK)
-    VALUES(%s, %s, %s, %s, %s)
+    INSERT INTO products(CATEGORY, PRODUCT_NAME, DESCRIPTION, PRICE, IN_STOCK, IMG_PATH)
+    VALUES(%s, %s, %s, %s, %s, %s)
     '''
-    cursor.execute(query, (category, product_name, description, price, in_stock))
+    cursor.execute(query, (category, product_name, description, price, in_stock, img_path))

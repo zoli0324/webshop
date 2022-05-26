@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 import util
 import password_handler
+import uuid
 
 app = Flask(__name__)
 app.secret_key = "XMLDJfijEr"
@@ -102,8 +103,9 @@ def add_product():
             flash('No file selected for uploading')
             return redirect("/")
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+            filename = secure_filename(str(uuid.uuid4()) + "." + file.filename.split(".")[1])
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            util.add_product(category, product_name, description, price, in_stock, filename)
             flash('File successfully uploaded')
             return redirect('/')
         else:
