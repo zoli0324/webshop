@@ -6,7 +6,7 @@
 {% block content %}
         <div>
             <h2 class="text-color">Add Product:</h2>
-            <form action="/add-product" method="post">
+            <form action="/add-product" method="post" enctype=multipart/form-data>
                 <label for="category" class="text-color">Category:</label><br>
                     <input type="text" id="category" name="category" required><br><br>
                 <label for="product-name" class="text-color">Product Name:</label><br>
@@ -17,11 +17,11 @@
                     <input type="number" min="1" id="price" name="price" required><br><br>
                 <label for="in-stock" class="text-color">In Stock:</label><br>
                     <input type="number" min="0" id="in-stock" name="in-stock" required><br><br>
-                <label for="img-path" class="text-color">In Stock:</label><br>
-                    <input type="file" id="img-path" name="img-path"><br><br>
+                <label for="file" class="text-color">In Stock:</label><br>
+                     <input type="file" id="file" name="file" autocomplete="off"><br><br>
 
 
-                <input type="submit" value="Submit">
+                <input type="submit"  value="Upload">
             </form>
         </div>
 {% endblock %}

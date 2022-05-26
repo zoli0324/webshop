@@ -1,15 +1,31 @@
-from flask import Flask, render_template, redirect, request, url_for, flash, send_from_directory, session
+import imghdr
+
+from flask import Flask, render_template, redirect, request, url_for, flash, send_from_directory, session, abort
 from werkzeug.utils import secure_filename
 import os
 import util
 import password_handler
 
-UPLOAD_FOLDER = './static/images'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-
 app = Flask(__name__)
 app.secret_key = "XMLDJfijEr"
+
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
+path = os.getcwd()
+# file Upload
+UPLOAD_FOLDER = os.path.join(path, 'uploads')
+
+if not os.path.isdir(UPLOAD_FOLDER):
+    os.mkdir(UPLOAD_FOLDER)
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route("/")
@@ -69,14 +85,30 @@ def profile():
 def add_product():
     if request.method == "GET":
         return render_template("management.html")
-    else:
+
+    if request.method == 'POST':
+
         category = request.form["category"]
         product_name = request.form["product-name"]
         description = request.form["description"]
         price = request.form["price"]
         in_stock = request.form["in-stock"]
-        util.add_product(category, product_name, description, price, in_stock)
-    return redirect("/")
+
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect("/")
+        file = request.files['file']
+        if file.filename == '':
+            flash('No file selected for uploading')
+            return redirect("/")
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            flash('File successfully uploaded')
+            return redirect('/')
+        else:
+            flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+            return redirect("/")
 
 
 if __name__ == "__main__":
